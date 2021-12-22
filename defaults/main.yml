@@ -1,0 +1,40 @@
+---
+
+
+winfwadvsecstig_cat1_patch: true
+winfwadvsecstig_cat2_patch: true
+winfwadvsecstig_cat3_patch: true
+
+winfwadvsecstig_min_ansible_version: "2.6"
+
+# We've defined complexity-high to mean that we cannot automatically remediate
+# the rule in question.  In the future this might mean that the remediation
+# may fail in some cases.
+winfwadvsecstig_complexity_high: false
+
+# We've defined disruption-high to indicate items that are likely to cause
+# disruption in a normal workflow.  These items can be remediated automatically
+# but are disabled by default to avoid disruption.
+winfwadvsecstig_disruption_high: false
+
+# This parameter disables controls that could have a very lengthy find. For example
+# removing all files of a specific file type that search the entire drive.
+# If there is an action tied to the lengthy search the action task will be disabled as well
+winfwadvsecstig_lengthy_search: true
+
+winstig_skip_for_travis: false
+
+# Some tasks need to be skipped for CI/CD testing to work correctly
+winstig_skip_for_test: false
+
+winfwadvsecstig_workaround_for_disa_benchmark: true
+winfwadvsecstig_workaround_for_ssg_benchmark: true
+
+# tweak role to run in a non-privileged container
+winfwadvsecstig_system_is_container: false
+
+# tweak role to run skip tasks irrelevant for virtualized computers
+winfwadvsecstig_system_is_vm: true
+
+# This will skip the echo true tasks related to not implimented controls
+winfwadvsecstig_run_notimplemented: false
