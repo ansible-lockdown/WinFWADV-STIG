@@ -38,3 +38,10 @@ winfwadvsecstig_system_is_vm: true
 
 # This will skip the echo true tasks related to not implimented controls
 winfwadvsecstig_run_notimplemented: false
+
+# These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
+# PLEASE NOTE: These work in coordination with the cat1, cat2, cat3 group variables. You must enable an entire group
+# in order for the variables below to take effect.
+# CAT 1 Rules
+wnfwa_000004: true
+wnfwa_000012: true
