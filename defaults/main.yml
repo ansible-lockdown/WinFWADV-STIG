@@ -45,3 +45,14 @@ winfwadvsecstig_run_notimplemented: false
 # CAT 1 Rules
 wnfwa_000004: true
 wnfwa_000012: true
+wnfwa_000020: true
+
+# CAT 2 Rules
+wnfwa_000001: true
+wnfwa_000002: true
+wnfwa_000003: true
+wnfwa_000005: true
+wnfwa_000013: true
+wnfwa_000021: true
+wnfwa_000024: true
+wnfwa_000025: true

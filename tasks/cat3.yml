@@ -1,0 +1,13 @@
+---
+
+- name: "MEDIUM | WNFWA-000009 | PATCH | The Windows Firewall with Advanced Security log size must be configured for domain connections."
+
+  when:
+      - wnfwa_000009
+  tags:
+      - WNFWA-000009
+      - CAT3
+      - CCI-000140
+      - SRG-OS-000327-GPOS-00127
+      - SV-241994r698223_rule
+      - V-241994
