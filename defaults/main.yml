@@ -1,6 +1,6 @@
 ---
 
-
+# The three toggles belwo will enable/disable entire categories
 winfwadvsecstig_cat1_patch: true
 winfwadvsecstig_cat2_patch: true
 winfwadvsecstig_cat3_patch: true
@@ -68,9 +68,6 @@ wnfwa_000019: true
 wnfwa_000027: true
 wnfwa_000028: true
 wnfwa_000029: true
-
-
-
 
 # CAT 3 Variables
 
