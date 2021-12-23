@@ -1,6 +1,6 @@
 Windows Firewall and Advanced Security DISA STIG
 =========
-![Release](https://img.shields.io/github/v/release/ansible-lockdown/Windows-2019-STIG?style=plastic)
+![Release](https://img.shields.io/github/v/release/ansible-lockdown/WinFWADV-STIG?style=plastic)
 
 Configure a Windows Firewall and Advanced Security to be DISA STIG compliant. All findings will be audited by default. Non-disruptive CAT I, CAT II, and CAT III findings will be corrected by default.
 
