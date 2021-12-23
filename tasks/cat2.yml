@@ -123,12 +123,23 @@
       - SV-242005r698256_rule
       - V-242005
 
-- name: "MEDIUM | WNFWA-000100 | PATCH | Inbound exceptions to the firewall on domain workstations must only allow authorized remote management hosts."
-  
+- name: "MEDIUM | WNFWA-000100 | AUDIT | Inbound exceptions to the firewall on domain workstations must only allow authorized remote management hosts."
+  block:
+      - name: "MEDIUM | WNFWA-000100 | AUDIT | Inbound exceptions to the firewall on domain workstations must only allow authorized remote management hosts. | Get all enabled FW Rules"
+        win_shell: get-netfirewallrule -Enabled True -Direction Inbound
+        changed_when: false
+        failed_when: false
+        check_mode: no
+        register: wnfwa_000100_enabled_fw_rules
+
+      - name: "MEDIUM | WNFWA-000100 | AUDIT | Inbound exceptions to the firewall on domain workstations must only allow authorized remote management hosts. | Show enabled FW Rules"
+        debug:
+            msg:
+                - "Alert! Below are all of the enabled inbound firewall rules. Please review to confirm that you only allow authorized management systems and remote management hosts"
+                - "{{ wnfwa_000100_enabled_fw_rules.stdout_lines }}"
   when:
       - wnfwa_000100
       - ansible_windows_domain_member
-      - 
   tags:
       - WNFWA-000100
       - CAT2
