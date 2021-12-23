@@ -1,0 +1,87 @@
+---
+
+# The three toggles belwo will enable/disable entire categories
+winfwadvsecstig_cat1_patch: true
+winfwadvsecstig_cat2_patch: true
+winfwadvsecstig_cat3_patch: true
+
+winfwadvsecstig_min_ansible_version: "2.6"
+
+# We've defined complexity-high to mean that we cannot automatically remediate
+# the rule in question.  In the future this might mean that the remediation
+# may fail in some cases.
+winfwadvsecstig_complexity_high: false
+
+# We've defined disruption-high to indicate items that are likely to cause
+# disruption in a normal workflow.  These items can be remediated automatically
+# but are disabled by default to avoid disruption.
+winfwadvsecstig_disruption_high: false
+
+# This parameter disables controls that could have a very lengthy find. For example
+# removing all files of a specific file type that search the entire drive.
+# If there is an action tied to the lengthy search the action task will be disabled as well
+winfwadvsecstig_lengthy_search: true
+
+winstig_skip_for_travis: false
+
+# Some tasks need to be skipped for CI/CD testing to work correctly
+winstig_skip_for_test: false
+
+winfwadvsecstig_workaround_for_disa_benchmark: true
+winfwadvsecstig_workaround_for_ssg_benchmark: true
+
+# tweak role to run in a non-privileged container
+winfwadvsecstig_system_is_container: false
+
+# tweak role to run skip tasks irrelevant for virtualized computers
+winfwadvsecstig_system_is_vm: true
+
+# This will skip the echo true tasks related to not implimented controls
+winfwadvsecstig_run_notimplemented: false
+
+# These variables correspond with the STIG IDs defined in the STIG and allows you to enable/disable specific rules.
+# PLEASE NOTE: These work in coordination with the cat1, cat2, cat3 group variables. You must enable an entire group
+# in order for the variables below to take effect.
+# CAT 1 Rules
+wnfwa_000004: true
+wnfwa_000012: true
+wnfwa_000020: true
+
+# CAT 2 Rules
+wnfwa_000001: true
+wnfwa_000002: true
+wnfwa_000003: true
+wnfwa_000005: true
+wnfwa_000013: true
+wnfwa_000021: true
+wnfwa_000024: true
+wnfwa_000025: true
+wnfwa_000100: true
+
+# CAT 3 Rules
+wnfwa_000009: true
+wnfwa_000010: true
+wnfwa_000011: true
+wnfwa_000017: true
+wnfwa_000018: true
+wnfwa_000019: true
+wnfwa_000027: true
+wnfwa_000028: true
+wnfwa_000029: true
+
+# CAT 3 Variables
+
+# WNFWA-000009
+# winfwadvsecstig_domain_fw_log_size is the size of the log file generated
+# To conform to STIG standards the value should be 16,384 or greater. Value is in KB
+winfwadvsecstig_domain_fw_log_size: 16,384
+
+# WNFWA-000017
+# winfwadvsecstig_private_fw_log_size is the size of the log file
+# To conform to STIG stadnards the value should be 16,384 or greater. Value is in KB
+winfwadvsecstig_private_fw_log_size: 16,384
+
+# WNFWA-000027
+# winfwadvsecstig_public_fw_log_size is the size of the log file
+# To conform to STIG stadnards the value should be 16,384 or greater. Value is in KB
+winfwadvsecstig_public_fw_log_size: 16,384

@@ -1,0 +1,149 @@
+---
+
+- name: "MEDIUM | WNFWA-000001 | AUDIT | The Windows Firewall with Advanced Security must be enabled when connected to a domain."
+  debug:
+      msg: "This task is handled in Prelim due to CAT 1 tasks needing this enabled"
+  when:
+      - wnfwa_000001
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000001
+      - CAT2
+      - CCI-001414
+      - SRG-OS-000480-GPOS-00227
+      - SV-241989r698208_rule
+      - V-241989
+
+- name: "MEDIUM | WNFWA-000002 | AUDIT | The Windows Firewall with Advanced Security must be enabled when connected to a private network."
+  debug:
+      msg: "This task is handled in Prelim due to CAT 1 tasks needing this enabled"
+  when:
+      - wnfwa_000002
+  tags:
+      - WNFWA-000002
+      - CAT2
+      - CCI-001414
+      - SRG-OS-000480-GPOS-00227
+      - SV-241990r698211_rule
+      - V-241990
+
+- name: "MEDIUM | WNFWA-000003 | AUDIT | The Windows Firewall with Advanced Security must be enabled when connected to a public network."
+  debug:
+      msg: "This task is handled in Prelim due to CAT 1 tasks needing this enabled"
+  when:
+      - wnfwa_000003
+  tags:
+      - WNFWA-000003
+      - CAT2
+      - CCI-001414
+      - SRG-OS-000480-GPOS-00227
+      - SV-241991r698214_rule
+      - V-241991
+
+- name: "MEDIUM | WNFWA-000005 | PATCH | The Windows Firewall with Advanced Security must allow outbound connections, unless a rule explicitly blocks the connection when connected to a domain."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
+      value: DefaultOutboundAction
+      data: 0
+      type: dword
+  when:
+      - wnfwa_000005
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000005
+      - CAT2
+      - CCI-001094
+      - SRG-OS-000480-GPOS-00227
+      - SV-241993r698220_rule
+      - V-241993
+
+- name: "MEDIUM | WNFWA-000013 | PATCH | The Windows Firewall with Advanced Security must allow outbound connections, unless a rule explicitly blocks the connection when connected to a private network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile
+      value: DefaultOutboundAction
+      data: 0
+      type: dword
+  when:
+      - wnfwa_000013
+  tags:
+      - WNFWA-000013
+      - CAT2
+      - CCI-001094
+      - SRG-OS-000480-GPOS-00227
+      - SV-241998r698235_rule
+      - V-241998
+
+- name: "MEDIUM | WNFWA-000021 | PATCH | The Windows Firewall with Advanced Security must allow outbound connections, unless a rule explicitly blocks the connection when connected to a public network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+      value: DefaultOutboundAction
+      data: 0
+      type: dword
+  when:
+      - wnfwa_000021
+  tags:
+      - WNFWA-000021
+      - CAT2
+      - CCI-001094
+      - SRG-OS-000480-GPOS-00227
+      - SV-242003r698250_rule
+      - V-242003
+
+- name: "MEDIUM | WNFWA-000024 | PATCH | The Windows Firewall with Advanced Security local firewall rules must not be merged with Group Policy settings when connected to a public network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+      value: AllowLocalPolicyMerge
+      data: 0
+      type: dword
+  when:
+      - wnfwa_000024
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000024
+      - CAT2
+      - CCI-001190
+      - SRG-OS-000327-GPOS-00127
+      - SV-242004r698253_rule
+      - V-242004
+
+- name: "MEDIUM | WNFWA-000025 | PATCH | The Windows Firewall with Advanced Security local connection rules must not be merged with Group Policy settings when connected to a public network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+      value: AllowLocalIPsecPolicyMerge
+      data: 0
+      type: dword
+  when:
+      - wnfwa_000025
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000025
+      - CAT2
+      - CCI-001190
+      - SRG-OS-000327-GPOS-00127
+      - SV-242005r698256_rule
+      - V-242005
+
+- name: "MEDIUM | WNFWA-000100 | AUDIT | Inbound exceptions to the firewall on domain workstations must only allow authorized remote management hosts."
+  block:
+      - name: "MEDIUM | WNFWA-000100 | AUDIT | Inbound exceptions to the firewall on domain workstations must only allow authorized remote management hosts. | Get all enabled FW Rules"
+        win_shell: get-netfirewallrule -Enabled True -Direction Inbound
+        changed_when: false
+        failed_when: false
+        check_mode: no
+        register: wnfwa_000100_enabled_fw_rules
+
+      - name: "MEDIUM | WNFWA-000100 | AUDIT | Inbound exceptions to the firewall on domain workstations must only allow authorized remote management hosts. | Show enabled FW Rules"
+        debug:
+            msg:
+                - "Alert! Below are all of the enabled inbound firewall rules. Please review to confirm that you only allow authorized management systems and remote management hosts"
+                - "{{ wnfwa_000100_enabled_fw_rules.stdout_lines }}"
+  when:
+      - wnfwa_000100
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000100
+      - CAT2
+      - CCI-000067
+      - SRG-OS-000480-GPOS-00227
+      - SV-242009r698268_rule
+      - V-242009
