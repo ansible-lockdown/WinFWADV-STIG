@@ -56,3 +56,35 @@ wnfwa_000013: true
 wnfwa_000021: true
 wnfwa_000024: true
 wnfwa_000025: true
+wnfwa_000100: true
+
+# CAT 3 Rules
+wnfwa_000009: true
+wnfwa_000010: true
+wnfwa_000011: true
+wnfwa_000017: true
+wnfwa_000018: true
+wnfwa_000019: true
+wnfwa_000027: true
+wnfwa_000028: true
+wnfwa_000029: true
+
+
+
+
+# CAT 3 Variables
+
+# WNFWA-000009
+# winfwadvsecstig_domain_fw_log_size is the size of the log file generated
+# To conform to STIG standards the value should be 16,384 or greater. Value is in KB
+winfwadvsecstig_domain_fw_log_size: 16,384
+
+# WNFWA-000017
+# winfwadvsecstig_private_fw_log_size is the size of the log file
+# To conform to STIG stadnards the value should be 16,384 or greater. Value is in KB
+winfwadvsecstig_private_fw_log_size: 16,384
+
+# WNFWA-000027
+# winfwadvsecstig_public_fw_log_size is the size of the log file
+# To conform to STIG stadnards the value should be 16,384 or greater. Value is in KB
+winfwadvsecstig_public_fw_log_size: 16,384
