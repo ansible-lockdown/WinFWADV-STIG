@@ -1,0 +1,148 @@
+---
+
+- name: "LOW | WNFWA-000009 | PATCH | The Windows Firewall with Advanced Security log size must be configured for domain connections."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
+      value: LogFileSize
+      data: "{{ winfwadvsecstig_domain_fw_log_size }}"
+      type: dword
+  when:
+      - wnfwa_000009
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000009
+      - CAT3
+      - CCI-000140
+      - SRG-OS-000327-GPOS-00127
+      - SV-241994r698223_rule
+      - V-241994
+
+- name: "LOW | WNFWA-000010 | PATCH | The Windows Firewall with Advanced Security must log dropped packets when connected to a domain."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
+      value: LogDroppedPackets
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000010
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000010
+      - CAT3
+      - CCI-000172
+      - SRG-OS-000327-GPOS-00127
+      - SV-241995r698226_rule
+      - V-241995
+
+- name: "LOW | WNFWA-000011 | PATCH | The Windows Firewall with Advanced Security must log successful connections when connected to a domain."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
+      value: LogSuccessfulConnections
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000011
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000011
+      - CAT3
+      - CCI-001462
+      - SRG-OS-000327-GPOS-00127
+      - SV-241996r698229_rule
+      - V-241996
+
+- name: "LOW | WNFWA-000017 | PATCH | The Windows Firewall with Advanced Security log size must be configured for private network connections."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging
+      value: LogFileSize
+      data: "{{ winfwadvsecstig_private_fw_log_size }}"
+      type: dword
+  when:
+      - wnfwa_000017
+  tags:
+      - WNFWA-000017
+      - CAT3
+      - CCI-000140
+      - SRG-OS-000327-GPOS-00127
+      - SV-241999r698238_rule
+      - V-241999
+
+- name: "LOW | WNFWA-000018 | PATCH | The Windows Firewall with Advanced Security must log dropped packets when connected to a private network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging
+      value: LogDroppedPackets
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000018
+  tags:
+      - WNFWA-000018
+      - CAT3
+      - CCI-000172
+      - SRG-OS-000327-GPOS-00127
+      - SV-242000r698241_rule
+      - V-242000
+
+- name: "LOW | WNFWA-000019 | PATCH | The Windows Firewall with Advanced Security must log successful connections when connected to a private network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging
+      value: LogSuccessfulConnections
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000019
+  tags:
+      - WNFWA-000019
+      - CAT3
+      - CCI-001462
+      - SRG-OS-000327-GPOS-00127
+      - SV-242001r698244_rule
+      - V-242001
+
+- name: "LOW | WNFWA-000027 | PATCH | The Windows Firewall with Advanced Security log size must be configured for public network connections."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
+      value: LogFileSize
+      data: "{{ winfwadvsecstig_public_fw_log_size }}"
+      type: dword
+  when:
+      - wnfwa_000027
+  tags:
+      - WNFWA-000027
+      - CAT3
+      - CCI-000140
+      - SRG-OS-000327-GPOS-00127
+      - SV-242006r698259_rule
+      - V-242006
+
+- name: "LOW | WNFWA-000028 | PATCH | The Windows Firewall with Advanced Security must log dropped packets when connected to a public network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
+      value: LogDroppedPackets
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000028
+  tags:
+      - WNFWA-000028
+      - CAT3
+      - CCI-000172
+      - SRG-OS-000327-GPOS-00127
+      - SV-242007r698262_rule
+      - V-242007
+
+- name: "LOW | WNFWA-000029 | PATCH | The Windows Firewall with Advanced Security must log successful connections when connected to a public network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
+      value: LogSuccessfulConnections
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000029
+  tags:
+      - WNFWA-000029
+      - CAT3
+      - CCI-001462
+      - SRG-OS-000327-GPOS-00127
+      - SV-242008r698265_rule
+      - V-242008

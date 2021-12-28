@@ -1,0 +1,50 @@
+---
+
+- name: "HIGH | WNFWA-000004 | PATCH | The Windows Firewall with Advanced Security must block unsolicited inbound connections when connected to a domain."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
+      value: DefaultInboundAction
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000004
+      - ansible_windows_domain_member
+  tags:
+      - WNFWA-000004
+      - CAT1
+      - CCI-000382
+      - SRG-OS-000480-GPOS-00227
+      - SV-241992r698217_rule
+      - V-241992
+
+- name: "HIGH | WNFWA-000012 | PATCH | The Windows Firewall with Advanced Security must block unsolicited inbound connections when connected to a private network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile
+      value: DefaultInboundAction
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000012
+  tags:
+      - WNFWA-000012
+      - CAT1
+      - CCI-000382
+      - SRG-OS-000480-GPOS-00227
+      - SV-241997r698232_rule
+      - V-241997
+
+- name: "HIGH | WNFWA-000020 | PATCH | The Windows Firewall with Advanced Security must block unsolicited inbound connections when connected to a public network."
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+      value: DefaultInboundAction
+      data: 1
+      type: dword
+  when:
+      - wnfwa_000020
+  tags:
+      - WNFWA-000020
+      - CAT1
+      - CCI-000382
+      - SRG-OS-000480-GPOS-00227
+      - SV-242002r698247_rule
+      - V-242002
