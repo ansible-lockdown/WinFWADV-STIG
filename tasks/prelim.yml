@@ -1,9 +1,11 @@
 ---
 
 - name: "PRELIM | Enable Domain firewall profile"
-  win_firewall:
-      state: enabled
-      profile: Domain
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
+      name: EnableFirewall
+      data: 1
+      type: dword
   when:
       - ansible_windows_domain_member
       - winfwadvsecstig_cat1_patch or
@@ -13,9 +15,11 @@
         wnfwa_000005
 
 - name: "PRELIM | Enable Private firewall profile"
-  win_firewall:
-      state: enabled
-      profile: Private
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile
+      name: EnableFirewall
+      data: 1
+      type: dword
   when:
       - winfwadvsecstig_cat1_patch or
         winfwadvsecstig_cat2_patch
@@ -24,9 +28,11 @@
         wnfwa_000013
 
 - name: "PRELIM | Enable Public firewall profile"
-  win_firewall:
-      state: enabled
-      profile: Public
+  win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
+      name: EnableFirewall
+      data: 1
+      type: dword
   when:
       - winfwadvsecstig_cat1_patch or
         winfwadvsecstig_cat2_patch
